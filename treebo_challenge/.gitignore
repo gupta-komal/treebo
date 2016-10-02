@@ -1,0 +1,12 @@
+file.html
+*~
+
+*.pyc
+.idea/*
+__minitage__*
+bin/*
+__pycache__
+
+__pycache__/*
+*.rdb
+
