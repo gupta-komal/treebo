@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Heroic Features - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/assets/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../static/assets/css/heroic-features.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Page Content -->
+
+    <div class="container">
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron hero-spacer">
+            <div class="row text-info ">
+                <h2 class="text-center">Data Stats</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Average Rating: {{ data.average }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Max/Min Price: $ {{ data.price.Maximum }}/ $ {{ data.price.Minimum }}</p>
+                </div>
+                <div class="col-md-8">
+                    <p>Area Wise Distribution: BLR: {{ data.area_wise_hotel_distribution.BLR }}, CHE: {{ data.area_wise_hotel_distribution.CHE }},
+                    HYD: {{ data.area_wise_hotel_distribution.HYD }}, DEL: {{ data.area_wise_hotel_distribution.DEL }},
+                    MUM: {{ data.area_wise_hotel_distribution.MUM }}</p>
+                </div>
+            </div>
+
+            </div>
+
+        </header>
+
+        <hr>
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="../static/assets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../static/assets/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

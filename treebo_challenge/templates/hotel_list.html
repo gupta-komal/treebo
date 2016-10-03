@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<style>
+	.rating {
+	  unicode-bidi: bidi-override;
+	  direction: rtl;
+	  text-align: center;
+	}
+	.rating > span {
+	  display: inline-block;
+	  position: relative;
+	  font-size: 25px;
+	}
+	.rating > span,
+	.rating > span ~ span {
+	  color: gold;
+	}
+
+	.rating > span.filled:before,
+	.rating > span.filled ~ span.filled:before {
+	   content: "\2605";
+	   position: absolute;
+	   color: gold;
+	}
+    .link_content {
+        margin-top: 10px;
+         display: block; 
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          padding-left: 10px;
+    }
+    .img-view {
+        display: block;
+        /* max-width: 100%; */
+        height: 200px;
+        width: 350px;
+    }
+
+    .row {
+        padding-top: 10px;
+    }
+	</style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+  <body>
+    <div class="container">
+    <div class="row">
+        <form class="form-inline pull-xs-left" method="get" action="{% url 'list-view' %}">
+            <div class="btn-group">
+               <button type="button" class="btn btn-info">Sort By</button>
+               <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="submit" name="sort_by" value="rating">Rating</button>
+                <button class="dropdown-item" type="submit" name="sort_by" value="pricing">Pricing</button>
+
+              </div>
+            </div>
+        </form>
+        <form class="form-inline pull-xs-right" method="get" action="{% url 'list-view' %}">
+            <input class="form-control" type="text" placeholder="Search by name or Place" name="search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+<div class="row">
+{% for hotel in hotel_deals %}
+    <div class="col-sm-4 komal">
+
+    <!--Card-->
+    <div class="card card-cascade wider">
+
+        <!--Card image-->
+        <div class="view overlay hm-white-slight img-view">
+            <img src="{{ hotel.image }}" class="img-view">
+            <a href="#!">
+                <div class="mask"></div>
+            </a>
+        </div>
+        <!--/Card image-->
+
+        <!--Card content-->
+        <div class="card-block text-xs-center">
+            <!--Title-->
+            <h4 class="card-title"><strong>{{ hotel.name }}</strong></h4>
+            <h5>{{ hotel.city }}</h5>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="rating">
+                        {% if hotel.rating_star == 5 %}
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                        {% elif hotel.rating_star == 4 %}
+                            <span class="">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                        {% elif hotel.rating_star == 3 %}
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                        {% elif hotel.rating_star == 2 %}
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="filled">☆</span>
+                            <span class="filled">☆</span>
+                        {% elif hotel.rating_star == 1 %}
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="filled">☆</span>
+                        {% else %}
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                            <span class="">☆</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                   <div class="link_content">
+                        <span class="limit_char"> <a href="{{ hotel.link }}" target="_blank">Link: {{ hotel.link }}</a>
+                        </span>
+                   </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm-6">
+                    <div class="discount">
+                      Discount: {{ hotel.discount }} %
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                   <span><p>Price:<strike>${{ hotel.actual_price }}</strike> ${{ hotel.final_price }}</p> </span>
+                </div>
+            </div>
+
+
+        </div>
+        <!--/.Card content-->
+
+    </div>
+    <!--/.Card-->
+
+</div>
+{% endfor %}
+<!-- remove from here -->
+<!-- remove till here -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="text-xs-center">
+      <button class="btn btn-primary" id="loadMore"> Load More!</button>
+    </div>
+  </div>
+</div>
+<!-- <button class="primary" id="loadMore"> Load More </button> -->
+<!-- <a href="#" id="loadMore">Load More</a> -->
+</div>
+</div>
+
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+     $(document).ready(function(){
+        var len = $(".komal").length
+        if (len == 6){
+            $("#loadMore").remove()
+        }
+        $(".komal").slice(0, len).hide();
+        $(".komal:hidden").slice(0, 6).show();
+        $("#loadMore").on('click', function (e) {
+            e.preventDefault();
+            $(".komal:hidden").slice(0, 6).slideDown();
+            $(document).scrollTop($(document).height());
+
+        if ($(".komal:hidden").length == 0) {
+            $("#loadMore").remove()
+        }
+
+    });
+  });
+
+
+</script>
+  </body>
+</html>
+
