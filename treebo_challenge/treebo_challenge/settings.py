@@ -102,8 +102,8 @@ DATABASES = {
         'HOST': 'localhost',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'treebo_hotels',
-        'USER': 'flatpi',
-        'PASSWORD': 'flatpi'
+        'USER': 'komal',
+        'PASSWORD': 'komal'
     }
 }
 
